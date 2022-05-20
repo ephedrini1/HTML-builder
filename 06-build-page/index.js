@@ -1,6 +1,5 @@
 const path = require('path');
-const { readFile, writeFile, readdir, copyFile, mkdir } = require('fs').promises;
-const fs = require('fs');
+const { readFile, writeFile, readdir, copyFile, mkdir, rm } = require('fs').promises;
 
 const newFolderPath = path.join(__dirname, 'project-dist');
 const newAssetsPath = path.join(newFolderPath, 'assets');
@@ -13,11 +12,8 @@ const cssPath = path.join(__dirname, 'styles');
 const htmlPath = path.join(__dirname, 'template.html');
 
 async function createDir(dirName) {
-  fs.access(dirName, (error) => {
-    if (error) {
-      mkdir(dirName);
-    }
-  });
+  await rm(dirName, {recursive: true, force: true});
+  await mkdir(dirName);
 }
 
 async function createHtml() {
