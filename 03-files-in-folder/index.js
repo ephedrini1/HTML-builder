@@ -15,6 +15,6 @@ const { stdout } = process;
       }
     }
   } catch (error) {
-    stdout.write(`Error: ${error.message}\n`);
+    stdout.write(error.message);
   }
 })();
